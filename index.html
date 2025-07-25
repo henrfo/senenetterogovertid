@@ -1,365 +1,824 @@
 <!DOCTYPE html>
-<html lang="no" data-theme="default">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="HandheldFriendly" content="true">
     
-    <title>Senenetterogovertid AS | Digital Solutions</title>
+    <title>Senenetterogovertid</title>
     
-    <meta name="description" content="Senenetterogovertid AS tilbyr innovative løsninger for å optimalisere arbeidstid og øke produktivitet i digitale miljøer.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <meta name="description" content="Underwater Visual Narratives">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            /* Color palette - refined and desaturated */
+            --color-text: rgba(255, 255, 255, 0.95);
+            --color-text-muted: rgba(255, 255, 255, 0.65);
+            --color-bg-dark: #0a0e14;
+            --color-bg-light: #10151c;
+            --color-accent: rgba(210, 235, 245, 0.85);
+            
+            /* Typography */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-s: 1rem;
+            --space-m: 2rem;
+            --space-l: 4rem;
+            --space-xl: 8rem;
+            
+            /* Transitions */
+            --transition-slow: 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+            --transition-medium: 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            --transition-fast: 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--color-text);
+            background: linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-bg-light) 100%);
+            font-size: 15px;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: currentColor;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ::selection {
+            background-color: var(--color-accent);
+            color: var(--color-bg-dark);
+        }
+
+        /* Preloader */
+        .c-preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-dark);
+            color: var(--color-text);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity var(--transition-slow), visibility var(--transition-slow);
+        }
+
+        .c-preloader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .c-preloader_logo {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .c-preloader_logo:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-accent);
+            animation: lineGrow 1.5s var(--transition-medium);
+        }
+
+        @keyframes lineGrow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Header */
+        .c-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--space-m) var(--space-m);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .c-header_logo {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+        }
+
+        .c-header_logo_symbol {
+            display: inline-block;
+            margin-left: 0.3rem;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        .c-header_nav {
+            display: flex;
+            gap: var(--space-m);
+        }
+
+        .c-header_nav_link {
+            position: relative;
+            font-weight: 300;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+            transition: opacity var(--transition-medium);
+            padding-bottom: 0.2rem;
+        }
+
+        .c-header_nav_link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-text);
+            transition: width var(--transition-medium);
+        }
+
+        .c-header_nav_link:hover {
+            opacity: 1;
+        }
+
+        .c-header_nav_link:hover:after {
+            width: 100%;
+        }
+
+        .c-header_nav_link.is-active {
+            opacity: 1;
+        }
+
+        .c-header_nav_link.is-active:after {
+            width: 100%;
+        }
+
+        .c-header_cta {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            font-weight: 300;
+            opacity: 0.7;
+            transition: opacity var(--transition-medium);
+        }
+
+        .c-header_cta:hover {
+            opacity: 1;
+        }
+
+        /* Main content */
+        .c-main {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Subtle wave line */
+        .c-wave-line {
+            position: absolute;
+            bottom: 10%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.07);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .c-wave-line:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.1) 10%, 
+                rgba(255, 255, 255, 0.2) 20%, 
+                rgba(255, 255, 255, 0.1) 30%, 
+                rgba(255, 255, 255, 0) 40%, 
+                rgba(255, 255, 255, 0) 100%);
+            animation: waveMove 15s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+
+        /* Gallery view */
+        .c-gallery {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .c-gallery_track {
+            position: relative;
+            height: 75vh;
+            display: flex;
+            transition: transform var(--transition-slow);
+        }
+
+        .c-gallery_item {
+            position: relative;
+            min-width: 100%;
+            height: 100%;
+            padding: 0 var(--space-m);
+            opacity: 0;
+            transition: opacity var(--transition-slow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .c-gallery_item.is-active {
+            opacity: 1;
+        }
+
+        .c-gallery_inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .c-gallery_image {
+            position: relative;
+            width: 75%;
+            height: 90%;
+            overflow: hidden;
+        }
+
+        .c-gallery_image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .c-gallery_item:hover .c-gallery_image img {
+            transform: scale(1.02);
+        }
+
+        .c-gallery_content {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30%;
+            padding: 0 var(--space-m);
+        }
+
+        .c-gallery_subheading {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-s);
+        }
+
+        .c-gallery_heading {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 0.01em;
+            margin-bottom: var(--space-m);
+        }
+
+        .c-gallery_text {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            margin-bottom: var(--space-m);
+            color: var(--color-text-muted);
+        }
+
+        .c-gallery_link {
+            display: inline-block;
+            position: relative;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            font-weight: 300;
+            padding-bottom: 2px;
+        }
+
+        .c-gallery_link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-text-muted);
+            transition: transform var(--transition-medium);
+            transform-origin: right;
+            transform: scaleX(0);
+        }
+
+        .c-gallery_link:hover:after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        /* Gallery navigation */
+        .c-gallery_nav {
+            position: absolute;
+            bottom: var(--space-m);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: var(--space-s);
+            z-index: 10;
+        }
+
+        .c-gallery_nav_dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--color-text-muted);
+            opacity: 0.3;
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .c-gallery_nav_dot:hover {
+            opacity: 0.7;
+        }
+
+        .c-gallery_nav_dot.is-active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        .c-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--space-s) var(--space-m);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .c-footer_left,
+        .c-footer_right {
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            opacity: 0.4;
+        }
+
+        /* Custom cursor */
+        .c-cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-text);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity var(--transition-medium), width var(--transition-medium), height var(--transition-medium);
+            mix-blend-mode: difference;
+        }
+
+        .c-cursor.is-active {
+            opacity: 1;
+        }
+
+        .c-cursor.is-pointer {
+            width: 24px;
+            height: 24px;
+            background-color: transparent;
+            border: 1px solid var(--color-text);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .c-gallery_image {
+                width: 65%;
+            }
+            
+            .c-gallery_content {
+                width: 40%;
+            }
+            
+            .c-gallery_heading {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .c-header_nav {
+                display: none;
+            }
+            
+            .c-gallery_inner {
+                flex-direction: column;
+            }
+            
+            .c-gallery_image {
+                width: 100%;
+                height: 60%;
+            }
+            
+            .c-gallery_content {
+                position: relative;
+                width: 100%;
+                top: 0;
+                transform: none;
+                padding: var(--space-m) 0 0 0;
+            }
+            
+            .c-gallery_heading {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body data-module-load="main">
+<body>
     <!-- Preloader -->
     <div class="c-preloader">
-        <div class="c-preloader_outer">
-            <div class="c-preloader_logo">
-                <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
-                    <text x="10" y="35" fill="currentColor" font-family="Inter" font-size="20">Senenetterogovertid</text>
-                </svg>
-            </div>
+        <div class="c-preloader_logo">
+            Senenetterogovertid
         </div>
     </div>
 
+    <!-- Custom cursor -->
+    <div class="c-cursor"></div>
+
+    <!-- Header -->
     <header class="c-header">
-        <div class="c-header_inner">
-            <a href="/" class="c-header_logo" data-hover-shuffle>
-                <span class="c-header_logo_inner">Senenetterogovertid</span>®
-            </a>
+        <a href="#" class="c-header_logo">
+            Senenetterogovertid<span class="c-header_logo_symbol">∿</span>
+        </a>
 
-            <nav class="c-header_menu">
-                <ul class="c-header_menu_list">
-                    <li class="c-header_menu_item"><a href="#tjenester" class="c-header_menu_link" data-hover-shuffle>Tjenester</a></li>
-                    <li class="c-header_menu_item"><a href="#om-oss" class="c-header_menu_link" data-hover-shuffle>Om Oss</a></li>
-                    <li class="c-header_menu_item"><a href="#prosjekter" class="c-header_menu_link" data-hover-shuffle>Prosjekter</a></li>
-                </ul>
-            </nav>
+        <nav class="c-header_nav">
+            <a href="#gallery1" class="c-header_nav_link is-active" data-index="0">Film</a>
+            <a href="#gallery2" class="c-header_nav_link" data-index="1">Dive</a>
+            <a href="#gallery3" class="c-header_nav_link" data-index="2">Create</a>
+            <a href="#gallery4" class="c-header_nav_link" data-index="3">Explore</a>
+            <a href="#gallery5" class="c-header_nav_link" data-index="4">Contact</a>
+        </nav>
 
-            <a href="#kontakt" class="c-header_cta" data-hover-shuffle>Kontakt oss</a>
-            
-            <button class="c-header_menu-toggler" aria-expanded="false" aria-controls="mobile-menu" aria-label="Navigasjon mobil">
-                Meny
-            </button>
-        </div>
+        <a href="#contact" class="c-header_cta">Let's talk</a>
     </header>
 
-    <nav class="c-menu" id="mobile-menu">
-        <div class="c-menu_inner">
-            <ul class="c-menu_nav">
-                <li class="c-menu_nav_item">
-                    <a href="#tjenester" class="c-menu_nav_link">Tjenester</a>
-                </li>
-                <li class="c-menu_nav_item">
-                    <a href="#om-oss" class="c-menu_nav_link">Om Oss</a>
-                </li>
-                <li class="c-menu_nav_item">
-                    <a href="#prosjekter" class="c-menu_nav_link">Prosjekter</a>
-                </li>
-                <li class="c-menu_nav_item">
-                    <a href="#kontakt" class="c-menu_nav_link">Kontakt oss</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Main content -->
+    <main class="c-main">
+        <!-- Subtle wave line -->
+        <div class="c-wave-line"></div>
 
-    <div class="o-scroll">
-        <main>
-            <!-- Hero Section -->
-            <div class="c-home-hero" data-scroll-call="inview, HomeHero">
-                <div class="c-home-hero_content">
-                    <h1 class="c-heading -h1" data-allow-shuffle>
-                        <span aria-hidden="true">⚡</span> Senenetterogovertid® <br>
-                        Digitale løsninger for fremtiden<span aria-hidden="true">✨</span>
-                    </h1>
-                </div>
-
-                <div class="c-home-hero_background">
-                    <div class="c-video c-home-hero_video">
-                        <div class="o-ratio u-16:9"></div>
-                        <video class="c-video_media" playsinline muted loop autoplay>
-                            <source src="assets/videos/hero.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="o-container">
-                <!-- About Section -->
-                <div class="c-home-summary" id="om-oss">
-                    <span class="c-home-summary_label">
-                        ©2023-2025
-                    </span>
-
-                    <div class="c-home-summary_inner">
-                        <p class="c-home-summary_text">
-                            <span>Innovasjon</span>
-                            <span>Kvalitet</span>
-                            <span>Presisjon</span>
-                        </p>
-
-                        <div class="c-home-summary_visual c-ring">
-                            <!-- SVG ring animation would go here -->
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="2"></circle>
-                            </svg>
+        <!-- Gallery section -->
+        <div class="c-gallery">
+            <div class="c-gallery_track" id="gallery-track">
+                <!-- Gallery item 1 -->
+                <div class="c-gallery_item is-active" id="gallery1">
+                    <div class="c-gallery_inner">
+                        <div class="c-gallery_image">
+                            <img src="assets/images/gallery1.jpg" alt="Underwater cinematography">
                         </div>
-
-                        <span class="c-home-summary_footer">
-                            <a class="c-button -full c-home-summary_link" href="#tjenester" data-hover-shuffle="children" data-icon="→">
-                                <span class="c-button_label">Utforsk mer</span>
-                            </a>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Services Section -->
-                <h2 class="o-text -medium" id="tjenester">
-                    Våre tjenester
-                </h2>
-                
-                <section class="c-featured-links">
-                    <ul class="c-featured-links_list">
-                        <li class="c-featured-links_item" data-featured-links="item" data-hover-shuffle="children">
-                            <h3 class="u-screen-reader-text">Digital Strategi</h3>
-                            
-                            <div aria-hidden="true" class="c-featured-links_title">
-                                <span data-hover-shuffle-child>Digital</span>
-                                <div class="c-featured-links_visual -cover">
-                                    <span class="c-image_inner" style="background-image: url('assets/images/digital-strategy.jpg');">
-                                        <img class="c-image_img" alt="" width="300" height="189" src="assets/images/digital-strategy.jpg">
-                                    </span>
-                                </div>
-                                <span data-hover-shuffle-child>Strategi</span>
-                            </div>
-                            
-                            <a href="#digital-strategi" class="c-featured-links_link">Les mer om denne tjenesten</a>
-                        </li>
-                        
-                        <li class="c-featured-links_item" data-featured-links="item" data-hover-shuffle="children">
-                            <h3 class="u-screen-reader-text">Webdesign</h3>
-                            
-                            <div aria-hidden="true" class="c-featured-links_title">
-                                <span data-hover-shuffle-child>Web</span>
-                                <div class="c-featured-links_visual -cover">
-                                    <span class="c-image_inner" style="background-image: url('assets/images/webdesign.jpg');">
-                                        <img class="c-image_img" alt="" width="300" height="189" src="assets/images/webdesign.jpg">
-                                    </span>
-                                </div>
-                                <span data-hover-shuffle-child>Design</span>
-                            </div>
-                            
-                            <a href="#webdesign" class="c-featured-links_link">Les mer om denne tjenesten</a>
-                        </li>
-                        
-                        <li class="c-featured-links_item" data-featured-links="item" data-hover-shuffle="children">
-                            <h3 class="u-screen-reader-text">Systemutvikling</h3>
-                            
-                            <div aria-hidden="true" class="c-featured-links_title">
-                                <span data-hover-shuffle-child>System</span>
-                                <div class="c-featured-links_visual -cover">
-                                    <span class="c-image_inner" style="background-image: url('assets/images/development.jpg');">
-                                        <img class="c-image_img" alt="" width="300" height="189" src="assets/images/development.jpg">
-                                    </span>
-                                </div>
-                                <span data-hover-shuffle-child>Utvikling</span>
-                            </div>
-                            
-                            <a href="#systemutvikling" class="c-featured-links_link">Les mer om denne tjenesten</a>
-                        </li>
-                        
-                        <li class="c-featured-links_item -cta" data-featured-links="item" data-hover-shuffle="children">
-                            <h3 class="u-screen-reader-text">Alle tjenester</h3>
-                            
-                            <div aria-hidden="true" class="c-featured-links_title">
-                                <span data-hover-shuffle-child>Alle tjenester</span>
-                            </div>
-                            
-                            <a href="#alle-tjenester" class="c-featured-links_link">Se alle tjenester</a>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Projects Section -->
-                <div class="c-home-about" id="prosjekter">
-                    <div class="c-heading -h1 c-home-about_title">
-                        <span aria-hidden="true">✨</span>
-                        Vi spesialiserer oss på å levere skreddersydde digitale løsninger som optimaliserer arbeidsflyten og øker produktiviteten for virksomheter i alle størrelser.
-                        <span aria-hidden="true">⚡</span>
-                    </div>
-
-                    <div class="o-grid -col-12 -col-8 -col-4 -gutters">
-                        <div class="o-grid_item u-gc-2/5 u-gc-3/7">
-                            <div class="c-home-about_visual">
-                                <!-- Canvas for team animation would go here -->
-                                <canvas id="team-canvas" width="400" height="400"></canvas>
-                            </div>
-                            <span class="c-home-about_caption">
-                                <span>Alltid på jakt</span>
-                                <span>etter nye utfordringer</span>
-                            </span>
-                        </div>
-                        <div class="o-grid_item u-gc-5/9 u-gc-7/13 u-gc-2/5">
-                            <p class="o-text -medium u-margin -medium-bottom">
-                                Fra strategi til implementering og vedlikehold, er vi den ultimate digitale partneren. Vi leverer meningsfulle, innovative og resultatorienterte digitale opplevelser, webdesign og merkevarebygging. Friskhet garantert.
+                        <div class="c-gallery_content">
+                            <div class="c-gallery_subheading">Underwater Production</div>
+                            <h1 class="c-gallery_heading">Film • Dive • Create</h1>
+                            <p class="c-gallery_text">
+                                Specialized in underwater cinematography, we capture the unseen beauty beneath the surface with precision and artistry.
                             </p>
-                            <div class="o-grid -col-2 -gutters">
-                                <div class="u-gc-1/3 u-gc-1/2">
-                                    <a class="c-button -full c-home-about_link" href="#prosjekter" data-hover-shuffle="children" data-icon="→">
-                                        <span class="c-button_label" data-hover-shuffle-child>Prosjekter</span>
-                                    </a>
-                                    <br>
-                                    <a class="c-button -full c-home-about_link" href="#kontakt" data-hover-shuffle="children" data-icon="→">
-                                        <span class="c-button_label" data-hover-shuffle-child>Kontakt</span>
-                                    </a>
-                                </div>
-                            </div>
+                            <a href="#" class="c-gallery_link">Discover →</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Section -->
-                <section class="c-home-extras" id="kontakt">
-                    <h2 class="c-home-extras_title c-heading -h1">
-                        <span>Kontakt oss</span>
-                    </h2>
-
-                    <div class="c-section-overline">
-                        <div class="c-section-overline_inner">
-                            <h2 class="c-section-overline_title">Kontaktinformasjon</h2>
-                            
-                            <div class="o-grid -col-4 -gutters">
-                                <div class="o-grid_item u-gc-3/5 u-gc-2/5">
-                                    <ul class="c-list -no-border-last-child">
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="mailto:kontakt@senenetterogovertid.no" class="c-list_link" data-icon="&nbsp;&nbsp;✉" data-hover-shuffle>kontakt@senenetterogovertid.no</a>
-                                            </div>
-                                        </li>
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="tel:+4712345678" class="c-list_link" data-icon="&nbsp;&nbsp;☎" data-hover-shuffle>+47 123 45 678</a>
-                                            </div>
-                                        </li>
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="https://goo.gl/maps" target="_blank" rel="noopener noreferrer" class="c-list_link" data-icon="&nbsp;&nbsp;📍" data-hover-shuffle>Oslo, Norge</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                <!-- Gallery item 2 -->
+                <div class="c-gallery_item" id="gallery2">
+                    <div class="c-gallery_inner">
+                        <div class="c-gallery_image">
+                            <img src="assets/images/gallery2.jpg" alt="Technical diving">
+                        </div>
+                        <div class="c-gallery_content">
+                            <div class="c-gallery_subheading">Technical Expertise</div>
+                            <h1 class="c-gallery_heading">Diving Solutions</h1>
+                            <p class="c-gallery_text">
+                                Our team provides specialized underwater services for film production, research projects, and artistic installations.
+                            </p>
+                            <a href="#" class="c-gallery_link">Explore →</a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="c-section-overline">
-                        <div class="c-section-overline_inner">
-                            <h2 class="c-section-overline_title">Sosiale medier</h2>
-                            
-                            <div class="o-grid -col-4 -gutters">
-                                <div class="o-grid_item u-gc-3/5 u-gc-2/5">
-                                    <ul class="c-list -no-border-last-child">
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="c-list_link" data-icon="&nbsp;&nbsp;↗" data-hover-shuffle>LinkedIn</a>
-                                            </div>
-                                        </li>
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="c-list_link" data-icon="&nbsp;&nbsp;↗" data-hover-shuffle>Twitter</a>
-                                            </div>
-                                        </li>
-                                        <li class="c-list_row">
-                                            <div class="c-list_item">
-                                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="c-list_link" data-icon="&nbsp;&nbsp;↗" data-hover-shuffle>Instagram</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                <!-- Gallery item 3 -->
+                <div class="c-gallery_item" id="gallery3">
+                    <div class="c-gallery_inner">
+                        <div class="c-gallery_image">
+                            <img src="assets/images/gallery3.jpg" alt="Creative process">
+                        </div>
+                        <div class="c-gallery_content">
+                            <div class="c-gallery_subheading">Creative Process</div>
+                            <h1 class="c-gallery_heading">Visual Narratives</h1>
+                            <p class="c-gallery_text">
+                                From concept to final delivery, we craft compelling underwater stories with meticulous attention to detail and artistic vision.
+                            </p>
+                            <a href="#" class="c-gallery_link">Process →</a>
                         </div>
                     </div>
-                </section>
-            </div>
-        </main>
+                </div>
 
-        <footer class="c-footer">
-            <nav class="c-footer_nav">
-                <ul class="c-footer_menu-list">
-                    <li class="c-footer_menu -main">
-                        <h2 class="c-footer_menu_title">Meny</h2>
-                        <ul class="c-footer_menu_list">
-                            <li class="c-footer_menu_item u-none@to-small">
-                                <a href="#tjenester" class="c-footer_menu_link" data-hover-shuffle>Tjenester</a>
-                            </li>
-                            <li class="c-footer_menu_item u-none@to-small">
-                                <a href="#om-oss" class="c-footer_menu_link" data-hover-shuffle>Om Oss</a>
-                            </li>
-                            <li class="c-footer_menu_item u-none@to-small">
-                                <a href="#prosjekter" class="c-footer_menu_link" data-hover-shuffle>Prosjekter</a>
-                            </li>
-                            <li class="c-footer_menu_item u-none@to-small">
-                                <a href="#kontakt" class="c-footer_menu_link" data-hover-shuffle>Kontakt</a>
-                            </li>
-                            <li class="c-footer_menu_item u-none@to-small">
-                                <a href="#personvern" class="c-footer_menu_link" data-hover-shuffle>Personvern</a>
-                            </li>
-                        </ul>
-                    </li>
+                <!-- Gallery item 4 -->
+                <div class="c-gallery_item" id="gallery4">
+                    <div class="c-gallery_inner">
+                        <div class="c-gallery_image">
+                            <img src="assets/images/gallery4.jpg" alt="Project documentation">
+                        </div>
+                        <div class="c-gallery_content">
+                            <div class="c-gallery_subheading">Portfolio</div>
+                            <h1 class="c-gallery_heading">Featured Projects</h1>
+                            <p class="c-gallery_text">
+                                A curated selection of our work spanning documentary films, commercial productions, and underwater art installations.
+                            </p>
+                            <a href="#" class="c-gallery_link">View work →</a>
+                        </div>
+                    </div>
+                </div>
 
-                    <li class="c-footer_menu -social">
-                        <h2 class="c-footer_menu_title">Sosiale</h2>
-                        <ul class="c-footer_menu_list">
-                            <li class="c-footer_menu_item">
-                                <a href="https://linkedin.com" rel="noopener noreferrer" target="_blank" data-icon="↗" class="c-footer_menu_link" data-hover-shuffle>
-                                    LinkedIn
-                                </a>
-                            </li>
-                            <li class="c-footer_menu_item">
-                                <a href="https://twitter.com" rel="noopener noreferrer" target="_blank" data-icon="↗" class="c-footer_menu_link" data-hover-shuffle>
-                                    Twitter
-                                </a>
-                            </li>
-                            <li class="c-footer_menu_item">
-                                <a href="https://instagram.com" rel="noopener noreferrer" target="_blank" data-icon="↗" class="c-footer_menu_link" data-hover-shuffle>
-                                    Instagram
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="c-footer_coords" data-allow-shuffle>
-                <address>
-                    <a href="https://goo.gl/maps" rel="noopener noreferrer" target="_blank">
-                        <span aria-hidden="true">⚪</span>Storgata 1<span aria-hidden="true">🔠</span><br class="u-none@to-small">
-                        Oslo<span class="u-screen-reader-text">&nbsp;</span><span aria-hidden="true">🇳🇴</span>, <span class="u-no-break">Norge<span aria-hidden="true">✨</span>0000</span>
-                    </a>
-                </address>
-                <a href="tel:+4712345678">Telefon <span class="u-screen-reader-text">+47 123 45 678</span><span aria-hidden="true">📞</span></a> 
-                <a href="mailto:kontakt@senenetterogovertid.no">kontakt<span aria-hidden="true">🔄</span><span class="u-screen-reader-text">@</span>senenetterogovertid.no</a>
+                <!-- Gallery item 5 -->
+                <div class="c-gallery_item" id="gallery5">
+                    <div class="c-gallery_inner">
+                        <div class="c-gallery_image">
+                            <img src="assets/images/gallery5.jpg" alt="Contact us">
+                        </div>
+                        <div class="c-gallery_content">
+                            <div class="c-gallery_subheading">Get In Touch</div>
+                            <h1 class="c-gallery_heading">Start a Conversation</h1>
+                            <p class="c-gallery_text">
+                                We're ready to discuss how our underwater expertise can bring your vision to life, wherever your project may take us.
+                            </p>
+                            <a href="#" class="c-gallery_link">Contact →</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="c-footer_copyright">
-                ©2025
+            <!-- Gallery navigation dots -->
+            <div class="c-gallery_nav">
+                <div class="c-gallery_nav_dot is-active" data-index="0"></div>
+                <div class="c-gallery_nav_dot" data-index="1"></div>
+                <div class="c-gallery_nav_dot" data-index="2"></div>
+                <div class="c-gallery_nav_dot" data-index="3"></div>
+                <div class="c-gallery_nav_dot" data-index="4"></div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </main>
 
-    <!-- Scripts -->
-    <script src="script.js" defer></script>
+    <!-- Footer -->
+    <footer class="c-footer">
+        <div class="c-footer_left">
+            © 2025 Senenetterogovertid
+        </div>
+        <div class="c-footer_right">
+            Oslo, Norway
+        </div>
+    </footer>
+
+    <script>
+        // Initialize on document load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelector('.c-preloader').classList.add('is-hidden');
+            }, 2000);
+            
+            initGallery();
+            initCursorEffect();
+        });
+
+        // Gallery navigation
+        function initGallery() {
+            const track = document.getElementById('gallery-track');
+            const items = document.querySelectorAll('.c-gallery_item');
+            const dots = document.querySelectorAll('.c-gallery_nav_dot');
+            const navLinks = document.querySelectorAll('.c-header_nav_link');
+            let currentIndex = 0;
+            
+            // Function to go to a specific slide
+            function goToSlide(index) {
+                // Update track position
+                track.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Update active states
+                items.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('is-active');
+                    } else {
+                        item.classList.remove('is-active');
+                    }
+                });
+                
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('is-active');
+                    } else {
+                        dot.classList.remove('is-active');
+                    }
+                });
+                
+                navLinks.forEach((link, i) => {
+                    if (i === index) {
+                        link.classList.add('is-active');
+                    } else {
+                        link.classList.remove('is-active');
+                    }
+                });
+                
+                currentIndex = index;
+            }
+            
+            // Set up dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    goToSlide(index);
+                });
+            });
+            
+            // Set up menu navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const index = parseInt(link.getAttribute('data-index'));
+                    goToSlide(index);
+                });
+            });
+            
+            // Arrow key navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    const nextIndex = (currentIndex + 1) % items.length;
+                    goToSlide(nextIndex);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    const prevIndex = (currentIndex - 1 + items.length) % items.length;
+                    goToSlide(prevIndex);
+                }
+            });
+            
+            // Swipe navigation for touch devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left
+                    const nextIndex = (currentIndex + 1) % items.length;
+                    goToSlide(nextIndex);
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right
+                    const prevIndex = (currentIndex - 1 + items.length) % items.length;
+                    goToSlide(prevIndex);
+                }
+            }
+            
+            // Mouse wheel navigation
+            let wheelTimeout;
+            document.addEventListener('wheel', (e) => {
+                clearTimeout(wheelTimeout);
+                
+                wheelTimeout = setTimeout(() => {
+                    if (e.deltaY > 0) {
+                        // Scroll down
+                        const nextIndex = (currentIndex + 1) % items.length;
+                        goToSlide(nextIndex);
+                    } else if (e.deltaY < 0) {
+                        // Scroll up
+                        const prevIndex = (currentIndex - 1 + items.length) % items.length;
+                        goToSlide(prevIndex);
+                    }
+                }, 50);
+            });
+            
+            // Initialize with first slide
+            goToSlide(0);
+        }
+
+        // Custom cursor effect
+        function initCursorEffect() {
+            const cursor = document.querySelector('.c-cursor');
+            let cursorVisible = false;
+            
+            // Hide default cursor
+            document.body.style.cursor = 'none';
+            
+            // Show custom cursor
+            document.addEventListener('mouseenter', () => {
+                cursor.classList.add('is-active');
+                cursorVisible = true;
+            });
+            
+            // Hide custom cursor
+            document.addEventListener('mouseleave', () => {
+                cursor.classList.remove('is-active');
+                cursorVisible = false;
+            });
+            
+            // Track cursor position with smooth animation
+            let mouseX = 0;
+            let mouseY = 0;
+            let cursorX = 0;
+            let cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function updateCursor() {
+                // Smooth follow with slight delay
+                const easing = 0.2;
+                cursorX += (mouseX - cursorX) * easing;
+                cursorY += (mouseY - cursorY) * easing;
+                
+                if (cursorVisible) {
+                    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                }
+                
+                requestAnimationFrame(updateCursor);
+            }
+            
+            updateCursor();
+            
+            // Cursor style for interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .c-gallery_nav_dot');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('is-pointer');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('is-pointer');
+                });
+            });
+        }
+    </script>
 </body>
 </html>

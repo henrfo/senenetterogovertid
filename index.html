@@ -29,6 +29,15 @@
       </div>
       <div class="card-title">N&eacute;e Pauline &ndash; I Am Leaving (ft. Ol' Burger Beats)</div>
     </div>
+    <div class="card" data-youtube="rO_iJPSZDwQ">
+      <div class="card-thumb">
+        <img src="https://img.youtube.com/vi/rO_iJPSZDwQ/maxresdefault.jpg" alt="Project 3" loading="lazy" />
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24" fill="none"><polygon points="6,3 20,12 6,21" fill="rgba(255,255,255,0.85)"/></svg>
+        </div>
+      </div>
+      <div class="card-title">Terje Formoe &ndash; Deja Vu</div>
+    </div>
   </div>
 
   <div class="lightbox" id="lightbox">
@@ -41,8 +50,8 @@
 
   <footer class="footer">
     <div class="footer-content">
-      <span>&copy; 2026 senenetterogovertid.no</span>
-      <span class="contact"><a href="mailto:hello@henrikformoe.no">hello@henrikformoe.no</a></span>
+      <span>&copy; 2026 Senenetterogovertid AS</span>
+      <span class="contact"><a href="mailto:henrik@senenetterogovertid.no">henrik@senenetterogovertid.no</a></span>
     </div>
   </footer>
 
@@ -55,9 +64,14 @@
 
     document.querySelectorAll('.card').forEach(function(card) {
       card.addEventListener('click', function() {
-        const vimeoId = card.getAttribute('data-vimeo');
-        const title = card.querySelector('.card-title').textContent;
-        lightboxVideo.innerHTML = '<iframe src="https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+        var title = card.querySelector('.card-title').textContent;
+        var vimeoId = card.getAttribute('data-vimeo');
+        var youtubeId = card.getAttribute('data-youtube');
+        if (vimeoId) {
+          lightboxVideo.innerHTML = '<iframe src="https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+        } else if (youtubeId) {
+          lightboxVideo.innerHTML = '<iframe src="https://www.youtube.com/embed/' + youtubeId + '?autoplay=1" frameborder="0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>';
+        }
         lightboxTitle.textContent = title;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -164,10 +178,11 @@
 
       vec3 blobColor(float phaseSpeed, float phaseOffset, float satMul, float t) {
         float p = t * phaseSpeed + phaseOffset;
-        vec3 a = vec3(0.08, 0.05, 0.09);
-        vec3 b = vec3(0.07, 0.04, 0.08);
+        // Orange palette — warm tones only
+        vec3 a = vec3(0.12, 0.05, 0.01);
+        vec3 b = vec3(0.08, 0.04, 0.015);
         vec3 c = vec3(1.0, 1.0, 1.0);
-        vec3 d = vec3(0.0, 0.33, 0.67);
+        vec3 d = vec3(0.0, 0.1, 0.2);
         vec3 col = a + b * cos(6.28318 * (c * p + d));
         return col * satMul;
       }
@@ -178,7 +193,7 @@
         vec2 p = vec2(uv.x * aspect, uv.y);
         float t = u_time;
 
-        vec3 col = vec3(0.008, 0.01, 0.018);
+        vec3 col = vec3(0.015, 0.008, 0.003);
 
         for (int i = 0; i < NUM_BIG; i++) {
           vec2 center = bigPos(i, t);

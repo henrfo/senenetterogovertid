@@ -13,7 +13,7 @@
   <div class="portfolio" id="portfolio">
     <div class="card" data-vimeo="1032166131">
       <div class="card-thumb">
-        <img src="https://vumbnail.com/1032166131.jpg" alt="Veronica Lund + Kilden" loading="lazy" />
+        <img src="https://vumbnail.com/1032166131_large.jpg" alt="Veronica Lund + Kilden" loading="lazy" />
         <div class="play-icon">
           <svg viewBox="0 0 24 24" fill="none"><polygon points="6,3 20,12 6,21" fill="rgba(255,255,255,0.85)"/></svg>
         </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="card" data-vimeo="570996007">
       <div class="card-thumb">
-        <img src="https://vumbnail.com/570996007.jpg" alt="N&eacute;e Pauline - I Am Leaving" loading="lazy" />
+        <img src="https://vumbnail.com/570996007_large.jpg" alt="N&eacute;e Pauline - I Am Leaving" loading="lazy" />
         <div class="play-icon">
           <svg viewBox="0 0 24 24" fill="none"><polygon points="6,3 20,12 6,21" fill="rgba(255,255,255,0.85)"/></svg>
         </div>
@@ -51,7 +51,7 @@
   <footer class="footer">
     <div class="footer-content">
       <span>&copy; 2026 Senenetterogovertid AS</span>
-      <span class="contact"><a href="mailto:henrik@senenetterogovertid.no">henrik@senenetterogovertid.no</a></span>
+      <span class="contact"><a href="mailto:contact@senenetterogovertid.no">contact@senenetterogovertid.no</a></span>
     </div>
   </footer>
 
@@ -115,6 +115,7 @@
 
       #define NUM_BIG 4
       #define NUM_SMALL 4
+      #define NUM_COOL 3
 
       vec2 bigPos(int i, float t) {
         float s = t * 0.009;
@@ -176,13 +177,49 @@
         return base * (1.0 + 0.2 * sin(t * spd + phase));
       }
 
-      vec3 blobColor(float phaseSpeed, float phaseOffset, float satMul, float t) {
+      vec3 warmColor(float phaseSpeed, float phaseOffset, float satMul, float t) {
         float p = t * phaseSpeed + phaseOffset;
-        // Orange palette — warm tones only
-        vec3 a = vec3(0.12, 0.05, 0.01);
-        vec3 b = vec3(0.08, 0.04, 0.015);
+        vec3 a = vec3(0.18, 0.08, 0.01);
+        vec3 b = vec3(0.14, 0.06, 0.01);
         vec3 c = vec3(1.0, 1.0, 1.0);
         vec3 d = vec3(0.0, 0.1, 0.2);
+        vec3 col = a + b * cos(6.28318 * (c * p + d));
+        return col * satMul;
+      }
+
+      // Cool blobs — deep blue/purple
+      vec2 coolPos(int i, float t) {
+        float s = t * 0.011;
+        float slow = t * 0.0025;
+        if (i == 0) return vec2(
+          0.5 + 0.4 * sin(s * 0.59 + 1.3) + 0.18 * cos(s * 0.97) + 0.35 * cos(slow * 0.27 + 4.1),
+          0.5 + 0.35 * cos(s * 0.73 + 3.7) + 0.14 * sin(s * 1.09) + 0.4 * sin(slow * 0.31 + 1.9)
+        );
+        if (i == 1) return vec2(
+          0.5 + 0.36 * cos(s * 0.67 + 5.1) + 0.15 * sin(s * 1.19) + 0.38 * sin(slow * 0.23 + 2.6),
+          0.5 + 0.3 * sin(s * 0.81 + 0.9) + 0.12 * cos(s * 0.89) + 0.42 * cos(slow * 0.29 + 5.3)
+        );
+        // i == 2
+        return vec2(
+          0.5 + 0.32 * sin(s * 0.77 + 3.4) + 0.16 * cos(s * 1.03) + 0.4 * cos(slow * 0.35 + 0.7),
+          0.5 + 0.38 * cos(s * 0.53 + 2.1) + 0.1 * sin(s * 1.27) + 0.36 * sin(slow * 0.19 + 3.8)
+        );
+      }
+
+      float coolRadius(int i, float t) {
+        float base, spd, phase;
+        if (i == 0)      { base = 0.55; spd = 0.12;  phase = 2.3; }
+        else if (i == 1) { base = 0.5;  spd = 0.16;  phase = 4.7; }
+        else             { base = 0.45; spd = 0.14;  phase = 0.9; }
+        return base * (1.0 + 0.2 * sin(t * spd + phase));
+      }
+
+      vec3 coolColor(float phaseSpeed, float phaseOffset, float satMul, float t) {
+        float p = t * phaseSpeed + phaseOffset;
+        vec3 a = vec3(0.02, 0.04, 0.18);
+        vec3 b = vec3(0.015, 0.04, 0.14);
+        vec3 c = vec3(1.0, 1.0, 1.0);
+        vec3 d = vec3(0.7, 0.55, 0.0);
         vec3 col = a + b * cos(6.28318 * (c * p + d));
         return col * satMul;
       }
@@ -193,7 +230,8 @@
         vec2 p = vec2(uv.x * aspect, uv.y);
         float t = u_time;
 
-        vec3 col = vec3(0.015, 0.008, 0.003);
+        vec3 warm = vec3(0.0);
+        vec3 cool = vec3(0.0);
 
         for (int i = 0; i < NUM_BIG; i++) {
           vec2 center = bigPos(i, t);
@@ -208,7 +246,7 @@
           else if (i == 2) { spd = 0.0027; off = 0.5;  sat = 1.5; }
           else             { spd = 0.0013; off = 0.75; sat = 0.9; }
 
-          col += blobColor(spd, off, sat, t) * intensity;
+          warm += warmColor(spd, off, sat, t) * intensity;
         }
 
         for (int i = 0; i < NUM_SMALL; i++) {
@@ -224,8 +262,27 @@
           else if (i == 2) { spd = 0.0034; off = 0.625; sat = 1.6; }
           else             { spd = 0.0019; off = 0.875; sat = 0.8; }
 
-          col += blobColor(spd, off, sat, t) * intensity * 0.7;
+          warm += warmColor(spd, off, sat, t) * intensity * 0.7;
         }
+
+        for (int i = 0; i < NUM_COOL; i++) {
+          vec2 center = coolPos(i, t);
+          center.x *= aspect;
+          float d = distance(p, center);
+          float r = coolRadius(i, t);
+          float intensity = exp(-2.0 * (d * d) / (r * r));
+
+          float spd, off, sat;
+          if (i == 0)      { spd = 0.0019; off = 0.0;  sat = 1.3; }
+          else if (i == 1) { spd = 0.0023; off = 0.35; sat = 1.0; }
+          else             { spd = 0.0015; off = 0.7;  sat = 1.5; }
+
+          cool += coolColor(spd, off, sat, t) * intensity;
+        }
+
+        // Screen blend: colors layer without muddying
+        vec3 base = vec3(0.012, 0.008, 0.006);
+        vec3 col = base + 1.0 - (1.0 - warm) * (1.0 - cool);
 
         float vig = 1.0 - length((uv - 0.5) * 1.4);
         vig = smoothstep(0.0, 0.7, vig);

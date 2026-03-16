@@ -1,178 +1,277 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="HandheldFriendly" content="true">
-    
-    <title>Senenetterogovertid</title>
-    
-    <meta name="description" content="Underwater Visual Narratives">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles/main.css">
-    
-    <!-- Force cursor to be visible -->
-    <style>
-        .c-cursor {
-            opacity: 1 !important;
-            background-color: white !important;
-            width: 12px !important;
-            height: 12px !important;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>senenetterogovertid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="c-preloader">
-        <div class="c-preloader_logo">
-            Senenetterogovertid
+  <canvas id="bg"></canvas>
+
+  <div class="portfolio" id="portfolio">
+    <div class="card" data-vimeo="1032166131">
+      <div class="card-thumb">
+        <img src="https://vumbnail.com/1032166131.jpg" alt="Veronica Lund + Kilden" loading="lazy" />
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24" fill="none"><polygon points="6,3 20,12 6,21" fill="rgba(255,255,255,0.85)"/></svg>
         </div>
+      </div>
+      <div class="card-title">Veronica Lund + Kilden (2025)</div>
     </div>
-
-    <!-- Custom cursor -->
-    <div class="c-cursor"></div>
-
-    <!-- Header -->
-    <header class="c-header">
-        <a href="#" class="c-header_logo">
-            Senenetterogovertid<span class="c-header_logo_symbol">∿</span>
-        </a>
-
-        <nav class="c-header_nav">
-            <a href="#gallery1" class="c-header_nav_link is-active" data-index="0">Film</a>
-            <a href="#gallery2" class="c-header_nav_link" data-index="1">Dive</a>
-            <a href="#gallery3" class="c-header_nav_link" data-index="2">Create</a>
-            <a href="#gallery4" class="c-header_nav_link" data-index="3">Explore</a>
-        </nav>
-
-        <a href="#contact" class="c-header_cta">Let's talk</a>
-    </header>
-
-    <!-- Main content -->
-    <main class="c-main">
-        <!-- Subtle wave line -->
-        <div class="c-wave-line"></div>
-
-        <!-- Gallery section -->
-        <div class="c-gallery">
-            <div class="c-gallery_track" id="gallery-track">
-                <!-- Gallery item 1 -->
-                <div class="c-gallery_item is-active" id="gallery1">
-                    <div class="c-gallery_inner">
-                        <div class="c-gallery_image">
-                            <img src="assets/images/underwater/okinawa_uw_1.jpg" alt="Underwater cinematography">
-                        </div>
-                        <div class="c-gallery_content">
-                            <div class="c-gallery_subheading">Underwater Production</div>
-                            <h1 class="c-gallery_heading">Film • Dive • Create</h1>
-                            <p class="c-gallery_text">
-                                Specialized in underwater cinematography, we capture the unseen beauty beneath the surface with precision and artistry.
-                            </p>
-                            <a href="#" class="c-gallery_link">Discover →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gallery item 2 -->
-                <div class="c-gallery_item" id="gallery2">
-                    <div class="c-gallery_inner">
-                        <div class="c-gallery_image">
-                            <img src="assets/images/underwater/okinawa_uw_2.jpg" alt="Technical diving">
-                        </div>
-                        <div class="c-gallery_content">
-                            <div class="c-gallery_subheading">Technical Expertise</div>
-                            <h1 class="c-gallery_heading">Diving Solutions</h1>
-                            <p class="c-gallery_text">
-                                Our team provides specialized underwater services for film production, research projects, and artistic installations.
-                            </p>
-                            <a href="#" class="c-gallery_link">Explore →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gallery item 3 -->
-                <div class="c-gallery_item" id="gallery3">
-                    <div class="c-gallery_inner">
-                        <div class="c-gallery_image">
-                            <img src="assets/images/underwater/okinawa_uw_3.jpg" alt="Creative process">
-                        </div>
-                        <div class="c-gallery_content">
-                            <div class="c-gallery_subheading">Creative Process</div>
-                            <h1 class="c-gallery_heading">Visual Narratives</h1>
-                            <p class="c-gallery_text">
-                                From concept to final delivery, we craft compelling underwater stories with meticulous attention to detail and artistic vision.
-                            </p>
-                            <a href="#" class="c-gallery_link">Process →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gallery item 4 -->
-                <div class="c-gallery_item" id="gallery4">
-                    <div class="c-gallery_inner">
-                        <div class="c-gallery_image">
-                            <img src="assets/images/underwater/okinawa_uw_4.jpg" alt="Project documentation">
-                        </div>
-                        <div class="c-gallery_content">
-                            <div class="c-gallery_subheading">Portfolio</div>
-                            <h1 class="c-gallery_heading">Featured Projects</h1>
-                            <p class="c-gallery_text">
-                                A curated selection of our work spanning documentary films, commercial productions, and underwater art installations.
-                            </p>
-                            <a href="#" class="c-gallery_link">View work →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery navigation dots -->
-            <div class="c-gallery_nav">
-                <div class="c-gallery_nav_dot is-active" data-index="0"></div>
-                <div class="c-gallery_nav_dot" data-index="1"></div>
-                <div class="c-gallery_nav_dot" data-index="2"></div>
-                <div class="c-gallery_nav_dot" data-index="3"></div>
-            </div>
+    <div class="card" data-vimeo="570996007">
+      <div class="card-thumb">
+        <img src="https://vumbnail.com/570996007.jpg" alt="N&eacute;e Pauline - I Am Leaving" loading="lazy" />
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24" fill="none"><polygon points="6,3 20,12 6,21" fill="rgba(255,255,255,0.85)"/></svg>
         </div>
-    </main>
+      </div>
+      <div class="card-title">N&eacute;e Pauline &ndash; I Am Leaving (ft. Ol' Burger Beats)</div>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="c-footer">
-        <div class="c-footer_left">
-            © 2025 Senenetterogovertid
-        </div>
-        <div class="c-footer_right">
-            Oslo, Norway
-        </div>
-    </footer>
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <div class="lightbox-content" id="lightbox-content">
+      <div class="lightbox-video" id="lightbox-video"></div>
+      <div class="lightbox-title" id="lightbox-title"></div>
+    </div>
+  </div>
 
-    <!-- Force preloader to hide after 2 seconds -->
-    <script>
-        setTimeout(function() {
-            document.querySelector('.c-preloader').classList.add('is-hidden');
-        }, 2000);
-    </script>
+  <footer class="footer">
+    <div class="footer-content">
+      <span>&copy; 2026 senenetterogovertid.no</span>
+      <span class="contact"><a href="mailto:hello@henrikformoe.no">hello@henrikformoe.no</a></span>
+    </div>
+  </footer>
 
-    <!-- Main script -->
-    <script src="scripts/script.js"></script>
-    
-    <!-- Custom cursor script -->
-    <script src="scripts/cursor.js"></script>
-    
-    <!-- Simple direct cursor script as a fallback -->
-    <script>
-        // Simple direct cursor implementation as a backup
-        document.addEventListener('mousemove', function(e) {
-            var cursor = document.querySelector('.c-cursor');
-            cursor.style.opacity = '1';
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
-    </script>
+  <script>
+    // --- Lightbox ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxTitle = document.getElementById('lightbox-title');
+
+    document.querySelectorAll('.card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        const vimeoId = card.getAttribute('data-vimeo');
+        const title = card.querySelector('.card-title').textContent;
+        lightboxVideo.innerHTML = '<iframe src="https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+        lightboxTitle.textContent = title;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      lightboxVideo.innerHTML = '';
+    }
+
+    // --- WebGL Background (same shader, slowed down) ---
+    const canvas = document.getElementById('bg');
+    const gl = canvas.getContext('webgl', {
+      antialias: false,
+      depth: false,
+      stencil: false,
+      alpha: false,
+      preserveDrawingBuffer: false
+    });
+
+    const vertSrc = `
+      attribute vec2 pos;
+      void main() { gl_Position = vec4(pos, 0.0, 1.0); }
+    `;
+
+    const fragSrc = `
+      precision highp float;
+      uniform float u_time;
+      uniform vec2 u_res;
+
+      #define NUM_BIG 4
+      #define NUM_SMALL 4
+
+      vec2 bigPos(int i, float t) {
+        float s = t * 0.009;
+        float slow = t * 0.002;
+        if (i == 0) return vec2(
+          0.5 + 0.35 * sin(s * 0.71) + 0.15 * sin(s * 1.13) + 0.4 * sin(slow * 0.31),
+          0.5 + 0.3 * cos(s * 0.63 + 1.0) + 0.12 * cos(s * 0.97) + 0.4 * cos(slow * 0.23 + 1.7)
+        );
+        if (i == 1) return vec2(
+          0.5 + 0.38 * sin(s * 0.53 + 2.1) + 0.16 * cos(s * 1.07) + 0.42 * cos(slow * 0.29 + 3.1),
+          0.5 + 0.32 * cos(s * 0.79 + 0.5) + 0.1 * sin(s * 1.31) + 0.38 * sin(slow * 0.19 + 0.4)
+        );
+        if (i == 2) return vec2(
+          0.5 + 0.3 * sin(s * 0.89 + 4.2) + 0.18 * sin(s * 0.67) + 0.45 * cos(slow * 0.37 + 5.2),
+          0.5 + 0.35 * cos(s * 0.47 + 3.1) + 0.14 * cos(s * 1.19) + 0.4 * sin(slow * 0.27 + 2.8)
+        );
+        return vec2(
+          0.5 + 0.33 * cos(s * 0.61 + 1.7) + 0.13 * sin(s * 1.23) + 0.42 * sin(slow * 0.33 + 1.1),
+          0.5 + 0.28 * sin(s * 0.83 + 5.3) + 0.15 * cos(s * 0.71) + 0.38 * cos(slow * 0.21 + 4.5)
+        );
+      }
+
+      float bigRadius(int i, float t) {
+        float base, spd, phase;
+        if (i == 0)      { base = 0.65; spd = 0.15;  phase = 0.0; }
+        else if (i == 1) { base = 0.7;  spd = 0.11;  phase = 1.8; }
+        else if (i == 2) { base = 0.6;  spd = 0.18;  phase = 3.5; }
+        else             { base = 0.68; spd = 0.13;  phase = 5.1; }
+        return base * (1.0 + 0.2 * sin(t * spd + phase));
+      }
+
+      vec2 smallPos(int i, float t) {
+        float s = t * 0.016;
+        float slow = t * 0.003;
+        if (i == 0) return vec2(
+          0.5 + 0.3 * sin(s * 0.83 + 0.7) + 0.1 * cos(s * 1.41) + 0.4 * cos(slow * 0.37 + 1.2),
+          0.5 + 0.28 * cos(s * 0.59 + 2.3) + 0.08 * sin(s * 1.17) + 0.38 * sin(slow * 0.29 + 4.3)
+        );
+        if (i == 1) return vec2(
+          0.5 + 0.32 * cos(s * 0.67 + 4.5) + 0.12 * sin(s * 1.29) + 0.42 * sin(slow * 0.23 + 5.6),
+          0.5 + 0.26 * sin(s * 0.91 + 1.1) + 0.1 * cos(s * 0.73) + 0.4 * cos(slow * 0.33 + 0.8)
+        );
+        if (i == 2) return vec2(
+          0.5 + 0.28 * sin(s * 1.03 + 3.2) + 0.14 * cos(s * 0.61) + 0.38 * cos(slow * 0.31 + 3.4),
+          0.5 + 0.32 * cos(s * 0.73 + 5.7) + 0.07 * sin(s * 1.37) + 0.42 * sin(slow * 0.26 + 1.9)
+        );
+        return vec2(
+          0.5 + 0.3 * cos(s * 0.79 + 0.3) + 0.11 * sin(s * 1.11) + 0.4 * sin(slow * 0.34 + 2.7),
+          0.5 + 0.27 * sin(s * 1.07 + 3.9) + 0.12 * cos(s * 0.53) + 0.38 * cos(slow * 0.21 + 5.1)
+        );
+      }
+
+      float smallRadius(int i, float t) {
+        float base, spd, phase;
+        if (i == 0)      { base = 0.22; spd = 0.19;  phase = 0.7; }
+        else if (i == 1) { base = 0.25; spd = 0.14;  phase = 2.9; }
+        else if (i == 2) { base = 0.2;  spd = 0.21;  phase = 4.3; }
+        else             { base = 0.23; spd = 0.16;  phase = 1.2; }
+        return base * (1.0 + 0.2 * sin(t * spd + phase));
+      }
+
+      vec3 blobColor(float phaseSpeed, float phaseOffset, float satMul, float t) {
+        float p = t * phaseSpeed + phaseOffset;
+        vec3 a = vec3(0.08, 0.05, 0.09);
+        vec3 b = vec3(0.07, 0.04, 0.08);
+        vec3 c = vec3(1.0, 1.0, 1.0);
+        vec3 d = vec3(0.0, 0.33, 0.67);
+        vec3 col = a + b * cos(6.28318 * (c * p + d));
+        return col * satMul;
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / u_res;
+        float aspect = u_res.x / u_res.y;
+        vec2 p = vec2(uv.x * aspect, uv.y);
+        float t = u_time;
+
+        vec3 col = vec3(0.008, 0.01, 0.018);
+
+        for (int i = 0; i < NUM_BIG; i++) {
+          vec2 center = bigPos(i, t);
+          center.x *= aspect;
+          float d = distance(p, center);
+          float r = bigRadius(i, t);
+          float intensity = exp(-2.0 * (d * d) / (r * r));
+
+          float spd, off, sat;
+          if (i == 0)      { spd = 0.0024; off = 0.0;  sat = 1.4; }
+          else if (i == 1) { spd = 0.0017; off = 0.25; sat = 0.7; }
+          else if (i == 2) { spd = 0.0027; off = 0.5;  sat = 1.5; }
+          else             { spd = 0.0013; off = 0.75; sat = 0.9; }
+
+          col += blobColor(spd, off, sat, t) * intensity;
+        }
+
+        for (int i = 0; i < NUM_SMALL; i++) {
+          vec2 center = smallPos(i, t);
+          center.x *= aspect;
+          float d = distance(p, center);
+          float r = smallRadius(i, t);
+          float intensity = exp(-2.0 * (d * d) / (r * r));
+
+          float spd, off, sat;
+          if (i == 0)      { spd = 0.0031; off = 0.125; sat = 1.2; }
+          else if (i == 1) { spd = 0.0022; off = 0.375; sat = 0.6; }
+          else if (i == 2) { spd = 0.0034; off = 0.625; sat = 1.6; }
+          else             { spd = 0.0019; off = 0.875; sat = 0.8; }
+
+          col += blobColor(spd, off, sat, t) * intensity * 0.7;
+        }
+
+        float vig = 1.0 - length((uv - 0.5) * 1.4);
+        vig = smoothstep(0.0, 0.7, vig);
+        col *= vig * 0.85 + 0.15;
+
+        float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
+        vec3 dither = vec3(n, n, n) / 255.0;
+        gl_FragColor = vec4(col + dither, 1.0);
+      }
+    `;
+
+    function createShader(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(s));
+      }
+      return s;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, createShader(gl.VERTEX_SHADER, vertSrc));
+    gl.attachShader(prog, createShader(gl.FRAGMENT_SHADER, fragSrc));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.error('Link error:', gl.getProgramInfoLog(prog));
+    }
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+    const posLoc = gl.getAttribLocation(prog, 'pos');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const timeLoc = gl.getUniformLocation(prog, 'u_time');
+    const resLoc = gl.getUniformLocation(prog, 'u_res');
+
+    const timeOffset = Math.random() * 100000;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+
+    function render(t) {
+      // 0.4x speed for subtler animation
+      gl.uniform1f(timeLoc, (t * 0.0004) + timeOffset);
+      gl.uniform2f(resLoc, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(render);
+  </script>
 </body>
 </html>

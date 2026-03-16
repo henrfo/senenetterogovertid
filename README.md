@@ -1,2 +1,0 @@
-# senenetterogovertid
-Senenetterogovertid AS webpage
